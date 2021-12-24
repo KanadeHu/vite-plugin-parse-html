@@ -1,11 +1,35 @@
 {
   "name": "vite-plugin-parse-html",
   "version": "1.0.0",
-  "description": "just parse html for your diy",
+  "description": "just parse html for your inject some script or css, more then inject some data",
   "main": "index.js",
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "vite-plugin-parse-html"
+  ],
+  "files": [
+    "README.md",
+    "README.zh-CN.md",
+    "dist",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "homepage": "https://github.com/KanadeHu/vite-plugin-parse-html/tree/master",
+  "bugs": {
+    "url": "https://github.com/KanadeHu/vite-plugin-parse-html/issues",
+    "email": "zhangywwork@163.com"
+  },
+  "peerDependencies": {
+    "vite": ">= 2.0.0"
+  },
   "author": "kanade",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
 }
