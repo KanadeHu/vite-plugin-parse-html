@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-parse-html",
+  "name": "vite-plugin-parse-html-packages",
   "version": "1.0.0",
   "description": "its a html parse plugin",
   "main": "index.js",
