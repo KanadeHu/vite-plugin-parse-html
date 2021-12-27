@@ -46,33 +46,26 @@ var __toCommonJS = /* @__PURE__ */ ((cache) => {
 var src_exports = {}
 __export(src_exports, {
   default: () => src_default,
-  injectHtml: () => injectHtml,
 })
+
+// src/inject.ts
 var import_ejs = __toESM(require('ejs'))
 function injectHtml(options) {
   return {
     name: 'vite:parse-html',
     enforce: 'pre',
-    transformIndexHtml: {
-      enforce: 'pre',
-      transform(html) {
-        console.log(html, '\u6587\u4EF6\u6587\u672C')
-        const { data, ejsOptions, tags = [] } = options
-        return {
-          html: (0, import_ejs.render)(html, data, ejsOptions),
-          tags,
-        }
-      },
+    transformIndexHtml(html) {
+      const { data, ejsOptions, tags = {} } = options
+      return (0, import_ejs.render)(html, data, ejsOptions)
     },
   }
 }
+
+// src/index.ts
 var src_default = (options) => {
-  const { inject } = options
+  const { inject = {} } = options
   return [injectHtml(inject)]
 }
 module.exports = __toCommonJS(src_exports)
 // Annotate the CommonJS export names for ESM import in node:
-0 &&
-  (module.exports = {
-    injectHtml,
-  })
+0 && (module.exports = {})
