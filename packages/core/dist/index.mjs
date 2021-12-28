@@ -2,11 +2,22 @@
 import { render } from "ejs";
 function injectHtml(options) {
   return {
-    name: "vite:parse-html",
+    name: "vite-parse-html",
     enforce: "pre",
-    transformIndexHtml(html) {
-      const { data, ejsOptions, tags = {} } = options;
-      return render(html, data, ejsOptions);
+    async transformIndexHtml(html) {
+      const { data, ejsOptions, tags = [] } = options;
+      const htmlStr = await render(html, data, ejsOptions);
+      const newTags = [{
+        tag: "script",
+        attrs: {
+          src: "http://xxxx"
+        },
+        injectTo: "head"
+      }];
+      return {
+        html: htmlStr,
+        tags: newTags
+      };
     }
   };
 }

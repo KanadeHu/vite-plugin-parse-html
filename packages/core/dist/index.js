@@ -52,11 +52,24 @@ __export(src_exports, {
 var import_ejs = __toESM(require('ejs'))
 function injectHtml(options) {
   return {
-    name: 'vite:parse-html',
+    name: 'vite-parse-html',
     enforce: 'pre',
-    transformIndexHtml(html) {
-      const { data, ejsOptions, tags = {} } = options
-      return (0, import_ejs.render)(html, data, ejsOptions)
+    async transformIndexHtml(html) {
+      const { data, ejsOptions, tags = [] } = options
+      const htmlStr = await (0, import_ejs.render)(html, data, ejsOptions)
+      const newTags = [
+        {
+          tag: 'script',
+          attrs: {
+            src: 'http://xxxx',
+          },
+          injectTo: 'head',
+        },
+      ]
+      return {
+        html: htmlStr,
+        tags: newTags,
+      }
     },
   }
 }

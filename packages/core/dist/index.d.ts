@@ -17,7 +17,35 @@ interface InjectOptions {
   /**
    * @description vite transform html tags
    */
-  tags?: HtmlTagDescriptor
+  tags?: HtmlTagDescriptor[]
+  /**
+   * @description External javavscript resources
+   */
+  scripts?: Array<ScriptItem>
+  /**
+   * @description External css resources
+   */
+  styleSheets?: Array<CssItem>
+}
+interface ScriptItem {
+  /**
+   * @description javascript cdn url
+   */
+  url: string
+  /**
+   * @description javascript name, just to descript
+   */
+  name?: string
+}
+interface CssItem {
+  /**
+   * @description css cdn url
+   */
+  url: string
+  /**
+   * @description css name, just to descript
+   */
+  name?: string
 }
 interface PluginOptions {
   /**
