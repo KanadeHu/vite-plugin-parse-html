@@ -1,6 +1,10 @@
-import { HtmlTagDescriptor, Plugin } from 'vite'
+import { Plugin } from 'vite'
 import { Options } from 'ejs'
 
+/**
+ * @description
+ */
+declare type InjectHtmlPosition = 'head' | 'body' | 'head-prepend' | 'body-prepend'
 /**
  * @description this is plugin options declare
  * @author kanade
@@ -15,37 +19,27 @@ interface InjectOptions {
    */
   ejsOptions?: Options
   /**
-   * @description vite transform html tags
+   * @description External javavscript or css resources
    */
-  tags?: HtmlTagDescriptor[]
-  /**
-   * @description External javavscript resources
-   */
-  scripts?: Array<ScriptItem>
-  /**
-   * @description External css resources
-   */
-  styleSheets?: Array<CssItem>
+  sources?: Array<SourceItem>
 }
-interface ScriptItem {
+interface SourceItem {
   /**
-   * @description javascript cdn url
+   * @description javascript\css cdn url
    */
   url: string
   /**
-   * @description javascript name, just to descript
+   * @description cdn file type
    */
-  name?: string
-}
-interface CssItem {
+  type: 'javaScript' | 'css'
   /**
-   * @description css cdn url
+   * @description inject source to html postion description
    */
-  url: string
+  position?: InjectHtmlPosition
   /**
-   * @description css name, just to descript
+   * @description other tag attribute such as rel, crossorigin ...
    */
-  name?: string
+  attrs?: Record<string, any>
 }
 interface PluginOptions {
   /**
