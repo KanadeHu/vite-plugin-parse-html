@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-parse-html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "just parse html for your inject some script or css, more then inject some data",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
