@@ -63,9 +63,10 @@ function injectHtml(options) {
 
 // src/index.ts
 var src_default = (options) => {
-  const { inject = {} } = options;
-  return [injectHtml(inject)];
+  const { inject: injectOpt = {} } = options;
+  return [injectHtml(injectOpt)];
 };
 export {
-  src_default as default
+  src_default as default,
+  injectHtml as inject
 };

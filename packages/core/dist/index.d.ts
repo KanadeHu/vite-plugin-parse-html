@@ -48,6 +48,11 @@ interface PluginOptions {
   inject?: InjectOptions
 }
 
+/**
+ * @description inject some variable scripts css to main html
+ */
+declare function injectHtml(options: InjectOptions): Plugin
+
 declare const _default: (options: PluginOptions) => Plugin[]
 
-export { InjectOptions, PluginOptions, _default as default }
+export { InjectOptions, PluginOptions, _default as default, injectHtml as inject }

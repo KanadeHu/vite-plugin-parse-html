@@ -58,6 +58,7 @@ var __toCommonJS = /* @__PURE__ */ ((cache) => {
 var src_exports = {}
 __export(src_exports, {
   default: () => src_default,
+  inject: () => injectHtml,
 })
 
 // src/inject.ts
@@ -114,9 +115,12 @@ function injectHtml(options) {
 
 // src/index.ts
 var src_default = (options) => {
-  const { inject = {} } = options
-  return [injectHtml(inject)]
+  const { inject: injectOpt = {} } = options
+  return [injectHtml(injectOpt)]
 }
 module.exports = __toCommonJS(src_exports)
 // Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {})
+0 &&
+  (module.exports = {
+    inject,
+  })
