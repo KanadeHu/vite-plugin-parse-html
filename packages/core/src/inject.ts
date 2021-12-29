@@ -14,7 +14,7 @@ export function resetTags(sources: Array<SourceItem>): HtmlTagDescriptor[] {
   }
   sources.forEach((item: SourceItem) => {
     switch (item.type) {
-      case 'javaScript':
+      case 'javascript':
         result.push({
           tag: 'script',
           attrs: {

@@ -7,4 +7,5 @@ export const tsup: Options = {
   entry: ['src/index.ts'],
   dts: true,
   clean: true,
+  minify: true,
 }

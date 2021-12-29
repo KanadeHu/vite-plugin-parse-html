@@ -30,7 +30,7 @@ export interface SourceItem {
   /**
    * @description cdn file type
    */
-  type: 'javaScript' | 'css'
+  type: 'javascript' | 'css'
   /**
    * @description inject source to html postion description
    */
