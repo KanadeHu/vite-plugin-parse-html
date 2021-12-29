@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-parse-html",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "just parse html for your inject some script or css, more then inject some data",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -11,10 +11,9 @@
     "vite-plugin-parse-html"
   ],
   "files": [
-    "README.md",
-    "README.zh-CN.md",
+    "../../README.md",
     "dist",
-    "CHANGELOG.md"
+    "../../CHANGELOG.md"
   ],
   "scripts": {
     "dev": "npm run build --watch",
