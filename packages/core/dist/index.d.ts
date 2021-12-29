@@ -31,7 +31,7 @@ interface SourceItem {
   /**
    * @description cdn file type
    */
-  type: 'javaScript' | 'css'
+  type: 'javascript' | 'css'
   /**
    * @description inject source to html postion description
    */
@@ -55,4 +55,4 @@ declare function injectHtml(options: InjectOptions): Plugin
 
 declare const _default: (options: PluginOptions) => Plugin[]
 
-export { InjectOptions, PluginOptions, _default as default, injectHtml as inject }
+export { InjectOptions, PluginOptions, SourceItem, _default as default, injectHtml as inject }
