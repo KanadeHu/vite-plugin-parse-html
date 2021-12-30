@@ -13,12 +13,12 @@
 
 ## Usage
 
-1、config vite.config.ts plugins option, or just import inject to config
+- 1、config vite.config.ts plugins option, or just import inject to config
 
 ```
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import parseHtml from '../core/dist/index'
+import parseHtml from 'vite-plugin-parse-html'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -47,7 +47,7 @@ export default defineConfig({
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import parseHtml, { inject } from '../core/dist/index'
+import { inject } from 'vite-plugin-parse-html'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -72,7 +72,7 @@ export default defineConfig({
 
 ```
 
-2、You can refer to EJS template syntax to set your index HTML
+- 2、You can refer to EJS template syntax to set your index HTML
 
 ```
 <!DOCTYPE html>
