@@ -11,9 +11,9 @@
     "vite-plugin-parse-html"
   ],
   "files": [
-    "../../README.md",
+    "README.md",
     "dist",
-    "../../CHANGELOG.md"
+    "CHANGELOG.md"
   ],
   "scripts": {
     "dev": "npm run build --watch",
