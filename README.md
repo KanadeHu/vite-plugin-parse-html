@@ -1,21 +1,22 @@
-# vite-plugin-parse-html
 
-## install
+<h1 align="center">vite-plugin-parse-html</h1>
 
-- node >= 12
-- vite >= 2.0.0
+[![npm package](https://img.shields.io/npm/v/vite-plugin-parse-html/latest.svg)](https://www.npmjs.com/package/vite-plugin-parse-html)
+[![npm downloads](https://img.shields.io/npm/dm/vite-plugin-parse-html.svg)](https://www.npmjs.com/package/vite-plugin-parse-html)
 
-```
+### install
+
+```bash
     yarn add vite-plugin-parse-html -D
 
     npm i vite-plugin-parse-html -D
 ```
 
-## Usage
+### Usage
 
 1、config vite.config.ts plugins option, or just import inject to config
 
-```
+```typescript
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import parseHtml from 'vite-plugin-parse-html'
@@ -74,7 +75,7 @@ export default defineConfig({
 
 2、You can refer to EJS template syntax to set your index HTML
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -90,7 +91,7 @@ export default defineConfig({
 </html>
 ```
 
-## Description of inject parameter
+### Description of inject parameter
 
 - injectOptions
 
@@ -109,6 +110,6 @@ export default defineConfig({
 | position  | 'head' 'body' 'head-prepend' 'body-prepend' | 'head'  | position: 'head'    | inject to html position   |
 | attrs     | Record<string, any>                         |         | { async: '' }       | tags attributes and value |
 
-## last
+### last
 
 You can also download git code directly to debug the example locally
