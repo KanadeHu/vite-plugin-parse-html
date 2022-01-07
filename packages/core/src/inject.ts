@@ -1,5 +1,5 @@
 import { render } from 'ejs'
-import { HtmlTagDescriptor, IndexHtmlTransformResult, Plugin } from 'vite'
+import { HtmlTagDescriptor, Plugin } from 'vite'
 import { InjectOptions, SourceItem } from './types'
 
 /**
@@ -43,18 +43,18 @@ export function resetTags(sources: Array<SourceItem>): HtmlTagDescriptor[] {
  * @description inject some variable scripts css to main html
  */
 export function injectHtml(options: InjectOptions): Plugin {
+  const { data, ejsOptions, sources = [] } = options
   return {
     name: 'vite-parse-html',
     enforce: 'pre',
-    async transformIndexHtml(html: string): Promise<IndexHtmlTransformResult> {
-      const { data, ejsOptions, sources = [] } = options
-      // ejs render to reset html
-      const htmlStr = await render(html, data, ejsOptions)
-      // tages reset
-      return {
-        html: htmlStr,
-        tags: resetTags(sources),
-      }
+    transformIndexHtml: {
+      enforce: 'pre',
+      async transform(html: string): Promise<any> {
+        return {
+          html: await render(html, data, ejsOptions),
+          tags: resetTags(sources),
+        }
+      },
     },
   }
 }

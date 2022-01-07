@@ -7,6 +7,7 @@ export default defineConfig({
     inject({
       data: {
         title: '测试demo',
+        isLocal: true,
       },
       sources: [
         {
@@ -14,7 +15,7 @@ export default defineConfig({
           url: 'http://xxxx',
         },
         {
-          type: 'javaScript',
+          type: 'javascript',
           url: 'http://yyyy',
         },
       ],
