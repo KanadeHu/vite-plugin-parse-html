@@ -41,11 +41,18 @@ interface SourceItem {
    */
   attrs?: Record<string, any>
 }
+interface MinifyOptions {
+  isMinify?: boolean
+}
 interface PluginOptions {
   /**
    * @description insert to html options(by ejs template)
    */
   inject?: InjectOptions
+  /**
+   * @description minify html option
+   */
+  minifyOpt?: MinifyOptions
 }
 
 /**
@@ -53,6 +60,16 @@ interface PluginOptions {
  */
 declare function injectHtml(options: InjectOptions): Plugin
 
+declare function minifyHtmlPlugin({ isMinify }: MinifyOptions): Plugin
+
 declare const _default: (options: PluginOptions) => Plugin[]
 
-export { InjectOptions, PluginOptions, SourceItem, _default as default, injectHtml as inject }
+export {
+  InjectOptions,
+  MinifyOptions,
+  PluginOptions,
+  SourceItem,
+  _default as default,
+  injectHtml as inject,
+  minifyHtmlPlugin as minify,
+}

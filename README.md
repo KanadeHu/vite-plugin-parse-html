@@ -1,4 +1,3 @@
-
 <h1 align="center">vite-plugin-parse-html</h1>
 
 [![npm package](https://img.shields.io/npm/v/vite-plugin-parse-html/latest.svg)](https://www.npmjs.com/package/vite-plugin-parse-html)
@@ -36,9 +35,12 @@ export default defineConfig({
           {
             type: 'javaScript',
             url: 'http://yyyy',
-          }
-        ]
+          },
+        ],
       },
+      minify: {
+        isMinify: true
+      }
     }),
     react(),
   ],
@@ -48,7 +50,7 @@ export default defineConfig({
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { inject } from 'vite-plugin-parse-html'
+import { inject, minify } from 'vite-plugin-parse-html'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -67,10 +69,12 @@ export default defineConfig({
         },
       ],
     }),
+    minify: {
+      isMinify: true
+    },
     react(),
   ],
 })
-
 ```
 
 2、You can refer to EJS template syntax to set your index HTML
@@ -109,6 +113,14 @@ export default defineConfig({
 | url       | string                                      |         | url: 'http://xxxxx' | source cdn url            |
 | position  | 'head' 'body' 'head-prepend' 'body-prepend' | 'head'  | position: 'head'    | inject to html position   |
 | attrs     | Record<string, any>                         |         | { async: '' }       | tags attributes and value |
+
+### Description of minify parameter
+
+- minifyOpt
+
+| parameter | type    | default | example        | description                                 |
+| --------- | ------- | ------- | -------------- | ------------------------------------------- |
+| isMinify  | boolean | true    | isMinify: true | Whether to turn on the minify html function |
 
 ### last
 

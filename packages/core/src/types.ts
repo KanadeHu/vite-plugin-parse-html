@@ -40,9 +40,16 @@ export interface SourceItem {
    */
   attrs?: Record<string, any>
 }
+export interface MinifyOptions {
+  isMinify?: boolean
+}
 export interface PluginOptions {
   /**
    * @description insert to html options(by ejs template)
    */
   inject?: InjectOptions
+  /**
+   * @description minify html option
+   */
+  minifyOpt?: MinifyOptions
 }
