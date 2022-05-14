@@ -38,7 +38,7 @@ export default defineConfig({
           },
         ],
       },
-      minify: {
+      minifyOpt: {
         isMinify: true
       }
     }),
