@@ -3,7 +3,24 @@
 [![npm package](https://img.shields.io/npm/v/vite-plugin-parse-html/latest.svg)](https://www.npmjs.com/package/vite-plugin-parse-html)
 [![npm downloads](https://img.shields.io/npm/dm/vite-plugin-parse-html.svg)](https://www.npmjs.com/package/vite-plugin-parse-html)
 
-### install
+> Note: this plugin support of vite 2.0.0+ and node 12.22.0+.
+
+This plugin is mainly used to modify the index.html host page in the vite project. It has the following functions:
+
+
+
+* Insert variables into the host page through the ejs template engine;
+
+* Through configuration items, some dynamically inserted javascript and css files are usually used to coordinate with the project externals
+
+* Indexhtml compression
+
+
+
+In the future, plugin will gradually support ssr and multi page applications
+
+## install
+___
 
 ```bash
     yarn add vite-plugin-parse-html -D
@@ -11,42 +28,11 @@
     npm i vite-plugin-parse-html -D
 ```
 
-### Usage
+## Usage
 
-1、config vite.config.ts plugins option, or just import inject to config
+1、Use the `inject` and `minify` configuration item in `vite.config.ts` to configure
 
 ```typescript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import parseHtml from 'vite-plugin-parse-html'
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    parseHtml({
-      inject: {
-        data: {
-          title: '测试demo',
-        },
-        sources: [
-          {
-            type: 'css',
-            url: 'http://xxxx',
-          },
-          {
-            type: 'javaScript',
-            url: 'http://yyyy',
-          },
-        ],
-      },
-      minifyOpt: {
-        isMinify: true
-      }
-    }),
-    react(),
-  ],
-})
-
-// just import inject
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -56,28 +42,26 @@ export default defineConfig({
   plugins: [
     inject({
       data: {
-        title: '测试demo',
+        title: 'test project',
       },
       sources: [
+        'http://xxxx.css',
+        'http://xxxx.js',
         {
-          type: 'css',
-          url: 'http://xxxx',
-        },
-        {
-          type: 'javaScript',
+          type: 'javascript',
           url: 'http://yyyy',
         },
       ],
     }),
-    minify: {
-      isMinify: true
-    },
+    minify({
+      isMinify: true,
+    }),
     react(),
   ],
 })
 ```
 
-2、You can refer to EJS template syntax to set your index HTML
+2、Use the ejs template to pre post to customize index.html
 
 ```html
 <!DOCTYPE html>
@@ -95,15 +79,15 @@ export default defineConfig({
 </html>
 ```
 
-### Description of inject parameter
+## Description of inject parameter
 
 - injectOptions
 
 | parameter  | type                | default | example         | description                      |
 | ---------- | ------------------- | ------- | --------------- | -------------------------------- |
-| data       | Record<string, any> | {}      | {title: 'xxxx'} | some variables to use index html |
+| data       | Record<string, any> | {}      | {title: 'xxxx'} | Variables used on the host page |
 | ejsOptions | Options             |         |                 |                                  |
-| sources    | Array<SourceItem>   | {}      |                 |                                  |
+| sources    | Array<SourceItem | string>   | {}      |     [ 'http://xxx.js' ]    or [{ url: 'http:xxx.js', type: 'javascript', position: 'head' }]        |                                  |
 
 - SourceItem
 
@@ -120,8 +104,5 @@ export default defineConfig({
 
 | parameter | type    | default | example        | description                                 |
 | --------- | ------- | ------- | -------------- | ------------------------------------------- |
-| isMinify  | boolean | true    | isMinify: true | Whether to turn on the minify html function |
+| isMinify  | boolean | true    | isMinify: true | Whether to compress the host page |
 
-### last
-
-You can also download git code directly to debug the example locally

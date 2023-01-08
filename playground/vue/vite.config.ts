@@ -1,19 +1,17 @@
 import { defineConfig, PluginOption } from 'vite'
 import react from '@vitejs/plugin-react'
-import { inject, minify } from '../core/dist/index'
+import { inject, minify } from 'vite-plugin-parse-html'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     inject({
       data: {
-        title: '测试demo',
+        title: 'test project',
         isLocal: true,
       },
       sources: [
-        {
-          type: 'css',
-          url: 'http://xxxx',
-        },
+        'http://xxxx.css',
+        'http://xxxx.js',
         {
           type: 'javascript',
           url: 'http://yyyy',

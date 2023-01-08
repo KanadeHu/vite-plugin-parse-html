@@ -1,33 +1,48 @@
 {
-  "name": "vite-plugin-parse-html-packages",
-  "version": "1.0.0",
-  "description": "its a html parse plugin",
-  "main": "index.js",
-  "private": "true",
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {
-    "test": "jest",
-    "genlog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "prepare": "husky install"
-  },
+  "name": "vite-plugin-parse-html",
+  "version": "1.0.7",
+  "description": "just parse html for your inject some script or css, more then inject some data",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "keywords": [
     "vite",
     "vite-plugin",
     "vite-plugin-parse-html"
   ],
+  "files": [
+    "README.md",
+    "dist",
+    "src",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "dev": "tsup src --watch",
+    "build": "tsup",
+    "test": "jest",
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "prepublishOnly": "yarn build"
+  },
+  "homepage": "https://github.com/KanadeHu/vite-plugin-parse-html/tree/master",
+  "bugs": {
+    "url": "https://github.com/KanadeHu/vite-plugin-parse-html/issues",
+    "email": "zhangywwork@163.com"
+  },
   "author": "kanade",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
+    "@types/ejs": "^3.1.0",
+    "@types/estree": "^0.0.51",
+    "@types/html-minifier-terser": "^6.1.0",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.10",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "commitizen": "^4.2.4",
     "conventional-changelog-cli": "^2.1.1",
+    "coveralls": "^3.1.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -42,7 +57,14 @@
     "ts-node": "^10.4.0",
     "tsup": "^5.11.6",
     "typescript": "^4.5.2",
-    "vite": "^2.6.14"
+    "vite": "^2.7.6"
+  },
+  "dependencies": {
+    "@rollup/pluginutils": "^4.1.2",
+    "build": "^0.1.4",
+    "ejs": "^3.1.6",
+    "html-minifier-terser": "^7.0.0-alpha.1",
+    "run": "^1.4.0"
   },
   "peerDependencies": {
     "node": ">=12.22.0",

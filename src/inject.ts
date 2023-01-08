@@ -1,40 +1,38 @@
 import { render } from 'ejs'
 import { HtmlTagDescriptor, Plugin } from 'vite'
 import { InjectOptions, SourceItem } from './types'
+import { judgeFileType } from './filter'
 
 /**
  * @description reset sources options
  * @param sources {Array<SourceItem>} sources option
  * @returns HtmlTagDescriptor tags
  */
-export function resetTags(sources: Array<SourceItem>): HtmlTagDescriptor[] {
+export function resetTags(sources: Array<SourceItem | string>): HtmlTagDescriptor[] {
   const result: Array<HtmlTagDescriptor> = []
   if (!sources.length) {
     return result
   }
-  sources.forEach((item: SourceItem) => {
-    switch (item.type) {
-      case 'javascript':
-        result.push({
-          tag: 'script',
-          attrs: {
-            src: item.url,
-            ...item.attrs,
-          },
-          injectTo: item.position || 'head',
-        })
-        break
-      default:
-        result.push({
-          tag: 'link',
-          attrs: {
-            href: item.url,
-            ...item.attrs,
-          },
-          injectTo: item.position || 'head',
-        })
-        break
+  sources.forEach((item: SourceItem | string) => {
+
+    if (typeof item === 'string') {
+      return result.push({
+        tag: judgeFileType(item) === 'css' ? 'link' : 'script',
+        attrs: {
+          [judgeFileType(item) === 'css' ? 'herf' : 'src']: item
+        },
+        injectTo: 'head'
+      })
     }
+
+    return result.push({
+      tag: item.type ==='javascript' ? 'script' : 'link',
+      attrs: {
+        [item.type ==='javascript' ? 'src' : 'herf']: item.url,
+        ...item.attrs,
+      },
+      injectTo: item.position || 'head',
+    })
   })
   return result
 }

@@ -1,15 +1,14 @@
-import { Plugin } from 'vite'
 import { Options } from 'ejs'
 
 /**
  * @description
  */
-declare type InjectHtmlPosition = 'head' | 'body' | 'head-prepend' | 'body-prepend'
+export type InjectHtmlPosition = 'head' | 'body' | 'head-prepend' | 'body-prepend'
 /**
  * @description this is plugin options declare
  * @author kanade
  */
-interface InjectOptions {
+export interface InjectOptions {
   /**
    * @description html variable
    */
@@ -21,9 +20,9 @@ interface InjectOptions {
   /**
    * @description External javavscript or css resources
    */
-  sources?: Array<SourceItem>
+  sources?: Array<SourceItem | string>
 }
-interface SourceItem {
+export interface SourceItem {
   /**
    * @description javascript\css cdn url
    */
@@ -41,10 +40,10 @@ interface SourceItem {
    */
   attrs?: Record<string, any>
 }
-interface MinifyOptions {
+export interface MinifyOptions {
   isMinify?: boolean
 }
-interface PluginOptions {
+export interface PluginOptions {
   /**
    * @description insert to html options(by ejs template)
    */
@@ -53,23 +52,4 @@ interface PluginOptions {
    * @description minify html option
    */
   minifyOpt?: MinifyOptions
-}
-
-/**
- * @description inject some variable scripts css to main html
- */
-declare function injectHtml(options: InjectOptions): Plugin
-
-declare function minifyHtmlPlugin({ isMinify }: MinifyOptions): Plugin
-
-declare const _default: (options: PluginOptions) => Plugin[]
-
-export {
-  InjectOptions,
-  MinifyOptions,
-  PluginOptions,
-  SourceItem,
-  _default as default,
-  injectHtml as inject,
-  minifyHtmlPlugin as minify,
 }
