@@ -1,4 +1,4 @@
-import { judgeFileType } from '../filter'
+import { judgeFileType } from '../utils'
 
 describe('judgeFileType method', () => {
   test('javascript', () => {

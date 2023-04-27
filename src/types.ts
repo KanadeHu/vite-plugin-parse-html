@@ -10,6 +10,10 @@ export type InjectHtmlPosition = 'head' | 'body' | 'head-prepend' | 'body-prepen
  */
 export interface InjectOptions {
   /**
+   * @description multiple page relative path, default value is '/index.html'
+   */
+  path?: string
+  /**
    * @description html variable
    */
   data?: Record<string, any>

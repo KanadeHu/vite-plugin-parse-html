@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
 import type { Options } from 'html-minifier-terser'
 import type { MinifyOptions } from './types'
-import { htmlFilter } from './filter'
+import { htmlFilter } from './utils'
 import { minify } from 'html-minifier-terser'
 
 function resetOptions(isMinify: boolean): Options {

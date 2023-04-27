@@ -3,39 +3,30 @@
 [![npm package](https://img.shields.io/npm/v/vite-plugin-parse-html/latest.svg)](https://www.npmjs.com/package/vite-plugin-parse-html)
 [![npm downloads](https://img.shields.io/npm/dm/vite-plugin-parse-html.svg)](https://www.npmjs.com/package/vite-plugin-parse-html)
 
-> Note: this plugin support of vite 2.0.0+ and node 12.22.0+.
+## 🎉 Features
 
-This plugin is mainly used to modify the index.html host page in the vite project. It has the following functions:
+- Insert variables into the host page through the ejs template engine;
 
+- Through configuration items, some dynamically inserted javascript and css files are usually used to coordinate with the project externals
 
+- Indexhtml compression
 
-* Insert variables into the host page through the ejs template engine;
+- support multi page applications
 
-* Through configuration items, some dynamically inserted javascript and css files are usually used to coordinate with the project externals
+## 📦 Installation
 
-* Indexhtml compression
+```shell
+  yarn add vite-plugin-parse-html -D
 
-
-
-In the future, plugin will gradually support ssr and multi page applications
-
-## install
-___
-
-```bash
-    yarn add vite-plugin-parse-html -D
-
-    npm i vite-plugin-parse-html -D
+  npm i vite-plugin-parse-html -D
 ```
 
-## Usage
+## 🔨 Usage
 
 1、Use the `inject` and `minify` configuration item in `vite.config.ts` to configure
 
 ```typescript
-
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+...
 import { inject, minify } from 'vite-plugin-parse-html'
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -47,10 +38,7 @@ export default defineConfig({
       sources: [
         'http://xxxx.css',
         'http://xxxx.js',
-        {
-          type: 'javascript',
-          url: 'http://yyyy',
-        },
+        { type: 'javascript', url: 'http://yyyy'},
       ],
     }),
     minify({
@@ -61,33 +49,56 @@ export default defineConfig({
 })
 ```
 
-2、Use the ejs template to pre post to customize index.html
+2、Using plugins in multi page programs
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+```typescript
+...
+import { inject, minify } from 'vite-plugin-parse-html'
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    inject([
+      {
+        path: '/index.html',
+        data: {
+          title: 'test project',
+        },
+        sources: [
+          'http://xxxx.css',
+          'http://xxxx.js',
+          { type: 'javascript', url: 'http://yyyy'},
+        ],
+      },
+      {
+        path:'/nest/index.html'
+        data: {
+          title: 'test project',
+        },
+        sources: [
+          'http://xxxx.css',
+          'http://xxxx.js',
+          { type: 'javascript', url: 'http://yyyy'},
+        ],
+      }
+    ]),
+    minify({
+      isMinify: true,
+    }),
+    ...
+  ],
+})
 ```
 
-## Description of inject parameter
+## 🔗 Description of inject parameter
 
-- injectOptions
+- inject(options: InjectOptions | InjectOptions[])
 
-| parameter  | type                | default | example         | description                      |
-| ---------- | ------------------- | ------- | --------------- | -------------------------------- |
-| data       | Record<string, any> | {}      | {title: 'xxxx'} | Variables used on the host page |
-| ejsOptions | Options             |         |                 |                                  |
-| sources    | Array<SourceItem | string>   | {}      |     [ 'http://xxx.js' ]    or [{ url: 'http:xxx.js', type: 'javascript', position: 'head' }]        |                                  |
+| parameter  | type                | default       | example            | description                                                                           |
+| ---------- | ------------------- | ------------- | ------------------ | ------------------------------------------------------------------------------------- |
+| path       | string              | '/index.html' | '/nest/index.html' | multiple page relative path                                                           |
+| data       | Record<string, any> | {}            | {title: 'xxxx'}    | Variables used on the host page                                                       |
+| ejsOptions | Options             |               |                    |                                                                                       |
+| sources    | Array<SourceItem    | string>       | {}                 | [ 'http://xxx.js' ] or [{ url: 'http:xxx.js', type: 'javascript', position: 'head' }] |
 
 - SourceItem
 
@@ -98,11 +109,10 @@ export default defineConfig({
 | position  | 'head' 'body' 'head-prepend' 'body-prepend' | 'head'  | position: 'head'    | inject to html position   |
 | attrs     | Record<string, any>                         |         | { async: '' }       | tags attributes and value |
 
-### Description of minify parameter
+## 🔗 Description of minify parameter
 
-- minifyOpt
+- minifyOpt(options: MinifyOptions)
 
-| parameter | type    | default | example        | description                                 |
-| --------- | ------- | ------- | -------------- | ------------------------------------------- |
+| parameter | type    | default | example        | description                       |
+| --------- | ------- | ------- | -------------- | --------------------------------- |
 | isMinify  | boolean | true    | isMinify: true | Whether to compress the host page |
-
